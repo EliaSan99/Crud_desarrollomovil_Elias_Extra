@@ -12,19 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
 import com.example.alumnos.DbContactos;
 
 import java.util.Calendar;
 import java.util.Random;
 
 public class NuevoActivity extends AppCompatActivity {
-
-    ImageView imageView;
-    Random r;
-    Integer [] images = {
-              R.drawable.avatar2, R.drawable.avatar3, R.drawable.avatar4, R.drawable.avatar5,
-    };
-
 
     EditText txtNombre, txtMatricula, txtApellidos, txtApellidoM,txtSexo,txtFecha;
     Button btnGuarda;
@@ -42,22 +36,16 @@ public class NuevoActivity extends AppCompatActivity {
         txtFecha=findViewById(R.id.txtFecha_nacimiento);
         btnGuarda = findViewById(R.id.btnGuarda);
 
-        imageView = (ImageView) findViewById(R.id.imageViewran);
-        r = new Random();
-
-
 
         btnGuarda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-
-
                 if(!txtNombre.getText().toString().equals("") && !txtMatricula.getText().toString().equals("") && !txtApellidos.getText().toString().equals("") && !txtApellidoM.getText().toString().equals("") && !txtSexo.getText().toString().equals("") && !txtFecha.getText().toString().equals("")) {
 
                     DbContactos dbContactos = new DbContactos(NuevoActivity.this);
                     long id = dbContactos.insertarContacto(txtNombre.getText().toString(), txtMatricula.getText().toString(), txtApellidos.getText().toString(),txtApellidoM.getText().toString(), txtSexo.getText().toString(), txtFecha.getText().toString());
-                    //imageView.setImageResource(images[r.nextInt(images.length)]);
+//                    imageView.setImageResource(images[r.nextInt(images.length)]);
                     if (id > 0) {
                         Toast.makeText(NuevoActivity.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
                         limpiar();

@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SearchView;
 
 import com.example.alumnos.ListaContactosAdapter;
@@ -19,6 +20,7 @@ import com.example.alumnos.ListaContactosAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
@@ -37,16 +39,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
 
         txtBuscar = findViewById(R.id.txtBuscar);
+        listaArrayContactos = new ArrayList<>();
         listaContactos = findViewById(R.id.listaContactos);
-
-
-
-        fabNuevo = findViewById(R.id.favNuevo);
         listaContactos.setLayoutManager(new LinearLayoutManager(this));
 
-        DbContactos dbContactos = new DbContactos(MainActivity.this);
+        fabNuevo = findViewById(R.id.favNuevo);
 
-        listaArrayContactos = new ArrayList<>();
+        DbContactos dbContactos = new DbContactos(MainActivity.this);
 
         adapter = new ListaContactosAdapter(dbContactos.mostrarContactos());
         listaContactos.setAdapter(adapter);
@@ -68,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         txtBuscar.setOnQueryTextListener(this);
     }
+
 
     private void nuevoRegistro(){
         Intent intent = new Intent(this, NuevoActivity.class);

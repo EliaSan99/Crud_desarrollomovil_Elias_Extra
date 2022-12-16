@@ -58,6 +58,7 @@ public class DbContactos extends DbHelper {
         if (cursorContactos.moveToFirst()) {
             do {
                 contacto = new Contactos();
+
                 contacto.setId(cursorContactos.getInt(0));
                 contacto.setNombre(cursorContactos.getString(1));
                 contacto.setMatricula(cursorContactos.getString(2));

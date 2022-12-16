@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,18 +20,19 @@ import com.example.alumnos.Contactos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
-public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAdapter.ContactoViewHolder> {
+public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAdapter.ContactoViewHolder>
+{
 
     private Context context;
     ArrayList<Contactos> listaContactos;
     ArrayList<Contactos> listaOriginal;
 
 
-
-
-    public ListaContactosAdapter(ArrayList<Contactos> listaContactos) {
+    public ListaContactosAdapter(ArrayList<Contactos> listaContactos)
+    {
         this.listaContactos = listaContactos;
         listaOriginal = new ArrayList<>();
         listaOriginal.addAll(listaContactos);
@@ -40,15 +42,25 @@ public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAd
 
     @NonNull
     @Override
-    public ContactoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ContactoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_item_contacto, null, false);
         return new ContactoViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ContactoViewHolder holder, int position) {
+        ImageView imageView;
+
+        Integer [] images = {
+              R.drawable.student, R.drawable.avatar2, R.drawable.avatar3, R.drawable.avatar4, R.drawable.avatar5
+        };
+        Random r = new Random();
 
 
+
+        holder.imageViewran.setImageResource(images[r.nextInt(images.length)]);
         holder.viewNombre.setText(listaContactos.get(position).getNombre());
         holder.viewMatricula.setText(listaContactos.get(position).getMatricula());
         holder.viewApellidos.setText(listaContactos.get(position).getApellidos());
@@ -86,7 +98,7 @@ public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAd
     }
 
     public class ContactoViewHolder extends RecyclerView.ViewHolder {
-
+       ImageView imageViewran;
         TextView viewNombre, viewMatricula, viewApellidos, viewApellidoM,viewSexo,viewFecha_nacimiento;
         CardView cvEfecto;
 
@@ -94,6 +106,7 @@ public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAd
             super(itemView);
 
             cvEfecto = itemView.findViewById(R.id.card);
+            imageViewran = (ImageView) itemView.findViewById(R.id.imageViewran);
             viewNombre = itemView.findViewById(R.id.viewNombre);
             viewMatricula = itemView.findViewById(R.id.viewMatricula);
             viewApellidos = itemView.findViewById(R.id.viewApellidos);
